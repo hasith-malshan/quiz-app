@@ -1,4 +1,4 @@
-package com.hasith.quizapp;
+package com.hasith.quizapp.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
