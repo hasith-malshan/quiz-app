@@ -18,7 +18,7 @@ public class QuestionController {
 
     @GetMapping("allQuestions")
     public String quiz(){
-        return "This Returns All Questions";
+        return questionService.getAllQuestions();
     }
 
 }
