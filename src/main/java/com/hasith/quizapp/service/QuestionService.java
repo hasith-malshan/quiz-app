@@ -23,4 +23,8 @@ public class QuestionService {
     public List<Question> findByCategory(String category) {
         return questionDao.findByCategory(category);
     }
+
+    public void addQuestion(Question question){
+        questionDao.save(question);
+    }
 }
