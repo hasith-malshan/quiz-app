@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("questions")
 public class QuestionController {
 
-    @GetMapping("hello")
+    @GetMapping("allQuestions")
     public String quiz(){
-        return "hello";
+        return "This Returns All Questions";
     }
 
 }
