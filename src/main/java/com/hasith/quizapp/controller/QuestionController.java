@@ -21,13 +21,13 @@ public class QuestionController {
         this.questionService = questionService;
     }
 
-    @GetMapping("allQuestions")
-    public List<Question> quiz(){
+    @GetMapping("all-questions")
+    public ResponseEntity<List<Question>> quiz(){
         return questionService.getAllQuestions();
     }
 
     @GetMapping("category/{category}")
-    public List<Question> getQuestionByCategory(@PathVariable("category") String category) {
+    public ResponseEntity<List<Question>> getQuestionByCategory(@PathVariable("category") String category) {
         String capitalizedCategoryName = category.substring(0,1).toUpperCase() + category.substring(1);
         return questionService.findByCategory(capitalizedCategoryName);
     }
