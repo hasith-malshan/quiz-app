@@ -5,6 +5,7 @@ import com.hasith.quizapp.dao.QuizDao;
 import com.hasith.quizapp.entities.Question;
 import com.hasith.quizapp.entities.QuestionWrapper;
 import com.hasith.quizapp.entities.Quiz;
+import com.hasith.quizapp.entities.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +26,10 @@ public class QuizService {
         this.quizDao = quizDao;
         this.questionDao = questionDao;
     }
+
     public ResponseEntity<String> createQuiz(String category, int numQ, String title) {
 
-        List<Question> questions = questionDao.findRandomQuestionByCategory(category,numQ);
+        List<Question> questions = questionDao.findRandomQuestionByCategory(category, numQ);
         Quiz quiz = new Quiz();
         quiz.setTitle(title);
         quiz.setQuestions(questions);
@@ -41,7 +43,7 @@ public class QuizService {
 
         List<QuestionWrapper> questionsForUSer = new ArrayList<>();
 
-        for (Question q : questionsFromDb){
+        for (Question q : questionsFromDb) {
             QuestionWrapper questionWrapper = new QuestionWrapper(
                     q.getId(),
                     q.getQuestionTitle(),
@@ -53,6 +55,19 @@ public class QuizService {
             questionsForUSer.add(questionWrapper);
         }
 
-        return new ResponseEntity<>(questionsForUSer,HttpStatus.OK);
+        return new ResponseEntity<>(questionsForUSer, HttpStatus.OK);
+    }
+
+    public ResponseEntity<Integer> calculateResult(Integer id, List<Response> responses) {
+        Quiz quiz = quizDao.findById(id).get();
+        List<Question> questions = quiz.getQuestions();
+
+        int right = 0;
+        int i = 0;
+        for (Response response : responses) {
+            if (response.getResponse().equals(questions.get(i).getRightAnswer())) ;
+        }
+
+        return new ResponseEntity<>(right, HttpStatus.OK);
     }
 }
